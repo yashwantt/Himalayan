@@ -1,0 +1,530 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+
+    <!-- Google Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,500,0,0" />
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="{% static 'website/css/swiper-bundle.min.css' %}">
+    <!-- RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Title -->
+
+    <title>Himalayan Tribe</title>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'website/images/himalayanTribeLogo1.png' %}" type="image/x-icon">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'website/css/singlePackage.css' %}">
+
+
+</head>
+<body id="bodyTag">
+    <header class="header">
+        <nav class="headerNav">
+            <figure class="logo">
+                <img src="{% static 'website/images/himalayanTribeLogo1.png' %}" alt="" id="logoImg">
+                    
+                <a href="tel:+917559700666" class="headerCall"><i class="ri-phone-line"></i> +91-7559700666
+                </a>
+            </figure>
+            
+            <ul class="headerUl upperCase">
+                <li class="innerLogo">
+                    <figure class="logo">
+                        <img src="{% static 'website/images/himalayanTribeLogo1.png' %}" alt="" id="innerLogoImg">
+                    </figure>
+                    <button id="hamburgerCloseBtn">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </li>
+                <li class="headerList">
+                    <a href="{% url 'home' %}" class="navListAnchor">
+                        <i class="ri-home-2-line"></i> home
+                    </a>
+                </li>
+                <li class="headerList">
+                    <a href="#overview-rental" class="navListAnchor"> 
+                        <i class="ri-map-pin-2-line"></i> overview
+                    </a>
+                </li>
+                <li class="headerList">
+                    <a href="#gallery" class="navListAnchor">
+                        <i class="ri-landscape-line"></i>
+                        gallery
+                    </a>
+                </li>
+                <li class="headerList">
+                    <a href="#testimonials" class="navListAnchor">
+                        <i class="ri-user-heart-line"></i>
+                        testimonials
+                    </a>
+                </li>
+                <li class="headerList">
+                    <a href="#query" class="navListAnchor">
+                        <i class="ri-chat-3-line"></i>
+                        contact us
+                    </a>
+                </li>
+                <li class="innerLogo">
+                    <img src="{% static 'website/images/shapes/deer12Horns.png' %}" alt="" class="innerLogoShape">
+                </li>
+            </ul>
+            <div class="hamburger">
+                <button id="hamburgerOpenBtn">
+                    <i class="ri-menu-4-fill"></i>
+                </button>
+                <div id="popUp"></div>
+            </div>
+        </nav>
+        <div class="headerContent">
+            <div id="indexHeaderMotto" class="headerMotto capitalize">
+                <h2 class="headerMotto">
+                    {{ pack.title }}
+                </h2>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- SECTION overview RENTAL -->
+    <section id="overview-rental">
+        <h1 id="overview-Header" class="sectionHeading capitalize">
+            <i class="ri-map-pin-2-line"></i>&nbsp;overview
+        </h1>
+        <h3 class="upperCase overview-heading3"> duration: {{ pack.nights }} nights / {{ pack.days }} days <br> starting point: {{ pack.starting_from }}</h3>
+        <p class="overview-header-para">
+            {% autoescape off %}
+            {{ pack.desc }}
+            {% endautoescape %}
+        </p>
+        <div class="overview-container">
+            {% autoescape off %}
+            {% for desc in descs %}
+                <div class="overview-cards">
+                    <figure class="overview-fig">
+                        <img class="overview-img" src="{{ desc.img }}" alt="">
+                    </figure>
+                    <div class="overview-content">
+                        <h3 class="upperCase overview-heading">
+                            day {{ desc.day }}
+                        </h3>
+                        <h2 class="upperCase overview-place">
+                            {{ desc.title }}
+                        </h2>
+                        <p class="overview-para">
+                            
+                            {{ desc.desc }}
+                            
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+            {% endautoescape %}
+            
+            
+        </div>
+
+        <div class="inclusion">
+            <h3 class="upperCase"> 
+                inclusion
+            </h3>
+            <ul class="inclusion-ul">
+                <!-- <li class="inclusion-list-items upperCase">4 DINNER + 5 BREAKFASTS</li> -->
+                {% if pack.volvo %}
+                    <li class="inclusion-list-items upperCase">AC VOLVO TICKETS</li>
+                    <li class="inclusion-list-items upperCase">{{ pack.nights }} DINNER + {{ pack.days }} BREAKFASTS</li>
+                {% endif %}
+                <li class="inclusion-list-items upperCase">STAYS</li>
+                <li class="inclusion-list-items upperCase">PICK & DROP</li>
+                <li class="inclusion-list-items upperCase">SIGHTSEEING AS PER TOUR ITINERARY
+                </li>
+                <li class="inclusion-list-items upperCase">ALL TOLL TAXES, PARKING FEES, AND DRIVERS ALLOWANCES
+                </li>
+                <li class="inclusion-list-items upperCase">24X7 TRAVEL ASSISTANCE THROUGH OUT THE TOUR
+                </li>
+            </ul>
+        </div>
+
+        <div class="exclusion">
+            <h3 class="upperCase"> 
+                exclusion
+            </h3>
+            <ul class="exclusion-ul">
+                <li class="exclusion-list-items upperCase">CHARGES FOR EARLY CHECK-IN & LATE CHECK-OUT AT HOTEL</li>
+                <li class="exclusion-list-items upperCase">LUNCH OR ANY OTHER MEALS SPECIFIED IN THE INCLUSIONS</li>
+                <li class="exclusion-list-items upperCase">HEATER CHARGES</li>
+                <li class="exclusion-list-items upperCase"> ANY AIR/TRAIN FARE
+                </li>
+                <li class="exclusion-list-items upperCase">MONUMENTS/MUESEUM/ART GALLERY ENTRANCE FEES
+                </li>
+                <li class="exclusion-list-items upperCase">ANY ADVENTURE ACTIVITY SKIING, PARAGLIDING, RIVER RAFTING ETC
+                </li>
+                <li class="exclusion-list-items upperCase">ANY EXTRA CHARGES OCCURING DUE TO NATURAL CALAMITIES</li>
+            </ul>
+        </div>
+        <form>
+            {% csrf_token %}
+            <div class="query-btn-container">
+                <!-- <button class="query-btn inc-exc-btn">Download PDF</button> -->
+                <button class="query-btn inc-exc-btn whatsappBtn" type="submit" formaction="https://wa.me/7014334328?text={{ pack.title }}" >Whatsapp For Price</button>
+                <button class="query-btn inc-exc-btn" type="submit" formaction="tel:+917559700666">Call For Price</button>
+            </div>
+        </form>
+        
+    </section>
+
+    <hr>
+
+    <!-- SECTION more PACKAGES -->
+    <section id="more-packages">
+
+
+        <!-- header -->
+        <h1 id="more-packagesHeader" class="sectionHeading capitalize">
+            <i class="ri-ancient-gate-line"></i>&nbsp; more packages
+        </h1>
+        <!-- About -->
+        <h4 class="upperCase sectionAbout">professionally hand written itineraries by our local tour experts</h4>
+        <!-- Slider -->
+        <div id="more-packagesSlider" class="slide-container swiper">
+            <div class="slide-content">
+                <div id="more-packagesSliderCardContainer" class="card-wrapper swiper-wrapper">
+                    <!-- Cards -->
+                    {% for package in similar %}
+                        <div class="card swiper-slide">
+                            <!-- div to handle the image -->
+                            <a href="{% url 'package' package.title %}">
+                                <div class="image-content popular-image-content round-corner">
+                                    <div class="card-image popular-card-image">
+                                        <img src="{{ package.front_img.url }}" alt="" class="card-img">
+                                    </div>
+                                    <div class="glassmorp-card">
+                                        <h4 class="upperCase glassmorp-heading">{{ package.title }}
+                                        </h4>
+                                        <p class="glassmorp-plan capitalize">
+                                            <i class="ri-time-line"></i>&nbsp; {{ package.days }} nights-{{ package.nights }} days
+                                        </p>
+                                        <h4 class="upperCase glassmorp-heading">EX {{ package.starting_from }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+                <div class="swiper-button-next swiper-navBtn"></div>
+                <div class="swiper-button-prev swiper-navBtn"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div> 
+
+
+        <!-- button for the destination page -->
+        <!-- <a id="packagesBtn" class="moreinfo capitalize" href="{">view all packages</a> -->
+
+
+    </section>
+    
+    <hr>
+    <!-- Query Section -->
+    
+    <section id="query">
+        <h1 id="galleryHeader" class="sectionHeading capitalize">
+            <i class="ri-chat-3-line"></i>&nbsp;contact us
+        </h1>
+        <form action="" class="query-form">
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <input type="email" name="email" id="email" placeholder="E-mail" required>
+            <input type="tel" name="telphone" id="telphone" placeholder="Phone Number" required>
+            <div class="query-form-div">
+                <span>
+                    <label for="start-date">Start-Date:</label>
+                    <input type="date" name="start-date" id="start-date" placeholder="Start-Date">
+                </span>
+                <span>
+                    <label for="end-date">End-Date:</label>
+                    <input type="date" name="end-date" id="end-date" placeholder="End-Date">
+                </span>
+                
+            </div>
+            <span class="query-form-category">
+                <label for="select-category" class="capitalize">Category&nbsp;: </label>
+                <select id="select-category" name="select-category" class="capitalize">
+                    <option hidden disabled selected value=""></option>
+                    <option value="family" class="capitalize">family</option>
+                    <option value="Exotic" class="capitalize">Exotic</option>
+                    <option value="honeymoon" class="capitalize">honeymoon</option>
+                    <option value="group" class="capitalize">group</option>
+                    <option value="mnc" class="capitalize">MNC</option>
+                    <option value="none" class="capitalize">none</option>
+                </select>
+            </span>
+            <textarea name="message" id="message" placeholder="Enter Query"></textarea>
+            <div class="query-btn-container">
+                <button class="query-btn whatsappBtn" type="submit">Whatsapp</button>
+                <button class="query-btn" type="submit">Email</button>
+            </div>
+        </form>
+    </section>
+
+    <hr>
+    <!-- Footer -->
+    <footer id="contactUs">
+        <h1 class="sectionHeading capitalize">      
+            || अतिथिदेवो भव: ||
+        </h1>
+
+        <div class="footer-upper">
+            <div class="footer-contact">
+                <h2 class="contact-text">
+                    Feel free to contact and reach us !!
+                </h2>
+        
+                <ul class="contact-ul">
+                    <li class="contact-item">
+                        <ul class="handler-ul">
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-whatsapp-line"></i>
+                                </a>
+                            </li>
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                            </li>
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-mail-line"></i>
+                                </a>
+                            </li>
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="contact-item">
+                        <i class="ri-phone-line"></i>
+                        <a href="tel:+917559700666" class="contact-link" target="_blank"> +91 7559700666</a>
+                    </li>
+        
+                    <li class="contact-item">
+                        <i class="ri-mail-line"></i>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=himalayantribetravels@gmail.com" class="contact-link" target="_blank"> himalayantribetravels@gmail.com</a>
+                    </li>
+        
+                    <li class="contact-item">
+                    <i class="ri-map-pin-2-line"></i>
+                        <address class="upperCase"> HIMALAYAN TRIBE, WARD NO. 15, SHAMTI SOLAN HIMACHal pradesh 173212</address>
+                    </li>
+        
+                </ul>
+            </div>
+
+            <div class="footer-shape">
+
+                <img src="{% static 'website/images/shapes/feets1.png' %}" alt="" class="feetImg">
+                
+            </div>
+            
+            <div class="quick-links">
+                <h2 class="contact-text capitalize">
+                    quick links
+                </h2>
+                <ul class="quick-ul">
+                    <li id="privacy-policy" class="quick-list capitalize">
+                        privacy policy
+                    </li>
+                    <li id="cancellation-policy" class="quick-list capitalize">
+                        cancellation policy
+                    </li>
+                    <li id="terms-and-cond" class="quick-list capitalize">
+                        terms & conditions
+                    </li>
+                    <li id="disclaimer-policy" class="quick-list capitalize">
+                        disclaimer
+                    </li>
+                    <li id="about-us" class="quick-list capitalize">
+                        about us
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="footer-lower">
+            <p class="copyright">
+                &copy; 2022 <a href="">HimalayanTribe</a>.&nbsp; All rights reserved
+            </p>
+        </div>
+
+    </footer>
+<!-- PopUp Div -->
+    <!-- privacy policy popup box  -->
+    <div id="pp-popup" class="footer-pop-div">
+        
+        <p id="pp-content" class="popup-content">
+            <span class="capitalize">
+                privacy policy
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            The terms “We” / “Us” / “Our”/”Company” individually and collectively refer to HIMALAYAN TRIBE and the terms “You” /”Your” / “Yourself” refer to the users.<br>
+
+This Privacy Policy is an electronic record in the form of an electronic contract formed under Informationation Technology Act, 2000 and the rules made thereunder and the amended provisions pertaining to electronic documents/records in various statutes as amended by the Information Technology Act, 2000. This Privacy Policy does not require any physical, electronic or digital signature.<br>
+
+This Privacy Policy is a legally binding document between you and HIMALAYAN TRIBE (both terms defined below). The terms of this Privacy Policy will be effective upon your acceptance of the same (directly or indirectly in electronic form, by clicking on the I accept tab or by use of the website or by other means) and will govern the relationship between you and HIMALAYAN TRIBE for your use of the website “www.himalayantribe.co” (defined below).<br>
+
+This document is published and shall be construed in accordance with the provisions of the Information Technology (reasonable security practices and procedures and sensitive personal data or information) rules, 2011 under Information Technology Act, 2000; that require publishing of the Privacy Policy for collection, use, storage and transfer of sensitive personal data or information.<br>
+
+Please read this Privacy Policy carefully by using the Website, you indicate that you understand, agree and consent to this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please do not use this Website.<br>
+
+By providing us your Information or by making use of the facilities provided by the Website, You hereby consent to the collection, storage, processing and transfer of any or all of Your Personal Information and Non-Personal Information by us as specified under this Privacy Policy. You further agree that such collection, use, storage and transfer of Your Information shall not cause any loss or wrongful gain to you or any other person.<br><br>
+USER INFORMATION<br>
+To avail certain services on our Websites, users are required to provide certain information for the registration process namely: – a) your name, b) email address, c) sex, d) age, e) PIN code, f) credit card or debit card details g) medical records and history h) sexual orientation, i) biometric information, j) password etc., and / or your occupation, interests, and the like. The Information as supplied by the users enables us to improve our sites and provide you the most user-friendly experience.<br>
+
+All required information is service dependent and we may use the above-said user information to, maintain, protect, and improve its services (including advertising services) and for developing new services<br>
+
+Such information will not be considered as sensitive if it is freely available and accessible in the public domain or is furnished under the Right to Information Act, 2005 or any other law for the time being in force.<br><br>
+COOKIES<br>
+To improve the responsiveness of the sites for our users, we may use “cookies”, or similar electronic tools to collect information to assign each visitor a unique, random number as a User Identification (User ID) to understand the user’s individual interests using the Identified Computer. Unless you voluntarily identify yourself (through registration, for example), we will have no way of knowing who you are, even if we assign a cookie to your computer. The only personal information a cookie can contain is information you supply (an example of this is when you ask for our Personalised Horoscope). A cookie cannot read data off your hard drive. Our advertisers may also assign their own cookies to your browser (if you click on their ads), a process that we do not control.<br>
+
+Our web servers automatically collect limited information about your computer’s connection to the Internet, including your IP address, when you visit our site. (Your IP address is a number that lets computers attached to the Internet know where to send you data — such as the web pages you view.) Your IP address does not identify you personally. We use this information to deliver our web pages to you upon request, to tailor our site to the interests of our users, to measure traffic within our site and let advertisers know the geographic locations from where our visitors come.<br><br>
+LINKS TO THE OTHER SITES<br>
+Our policy discloses the privacy practices for our own web site only. Our site provides links to other websites also that are beyond our control. We shall in no way be responsible in a way for your use of such sites.<br><br>
+INFORMATION SHARING<br>
+We share the sensitive personal information to any third party without obtaining the prior consent of the user in the following limited circumstances:<br>
+
+(a) When it is requested or required by law or by any court or governmental agency or authority to disclose, for the purpose of verification of identity, or for the prevention, detection, investigation including cyber incidents, or for prosecution and punishment of offenses. These disclosures are made in good faith and belief that such disclosure is reasonably necessary for enforcing these Terms; for complying with the applicable laws and regulations.<br>
+
+(b) We propose to share such information within its group companies and officers and employees of such group companies for the purpose of processing personal information on its behalf. We also ensure that these recipients of such information agree to process such information based on our instructions and in compliance with this Privacy Policy and any other appropriate confidentiality and security measures.<br><br>
+INFORMATION SECURITY<br>
+We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure or destruction of data. These include internal reviews of our data collection, storage and processing practices and security measures, including appropriate encryption and physical security measures to guard against unauthorized access to systems where we store personal data.<br>
+
+All information gathered on our Website is securely stored within our controlled database. The database is stored on servers secured behind a firewall; access to the servers is password-protected and is strictly limited. However, as effective as our security measures are, no security system is impenetrable. We cannot guarantee the security of our database, nor can we guarantee that information you supply will not be intercepted while being transmitted to us over the Internet. And, of course, any information you include in a posting to the discussion areas is available to anyone with Internet access.<br>
+
+However, the internet is an ever evolving medium. We may change our Privacy Policy from time to time to incorporate necessary future changes. Of course, our use of any information we gather will always be consistent with the policy under which the information was collected, regardless of what the new policy may be.<br>
+
+In accordance with Information Technology Act, 2000, if you wish to contact HIMALAYANTRIBE about this privacy policy or privacy-related issues via email, you may send an email to Himlayantribetravles@gmail.com. Alternatively, you may send your concern via postal mail/courier at the following address:<br>
+
+HIMALAYAN TRIBE, WARD 15, SHAMTI, SOLAN HIMACHAL PRADESH 173212<br>
+CONTACT : +91- 7559700666
+        </p>
+    </div>
+    <!-- cancellation -->
+    <div id="cp-popup" class="footer-pop-div">
+        <p id="cp-content" class="popup-content">
+            <span class="capitalize">
+                cancellation policy
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            If any customer is willing to cancel his / her booking due to any reasons like illness, death, accident or non-payment of the balance payment then the Company is liable to recover Cancellation charges from Client as follows:<br>
+•	15 % of total amount is charged if cancellations is done 30 days prior to departure of the tour.<br>
+•	30 % of total amount is charged if cancellations is done 20 days prior to departure of the tour.<br>
+•	50 % of total amount is charged if cancellations is done 10 days prior to departure of the tour.<br>
+•	In the case of unforeseen weather conditions or government restrictions, certain activities may be canceled and in such cases, the operator will try his best to provide an alternate feasible activity. However, no refund will be provided for the same.<br>
+
+        </p>
+    </div>
+    <!-- terms and conditions -->
+    <div id="tc-popup" class="footer-pop-div">
+        <p id="tc-content" class="popup-content">
+            <span class="capitalize">
+                terms & conditions
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            •	The photos/videos content created on HIMALAYAN TRIBE’s trip (by HIMALAYAN TRIBE’s content creators or clients) is the property of HIMALAYAN TRIBE and can only be used by HIMALAYAN TRIBE Experiences for advertising across media platforms. None of the digital content can be used by any one without obtaining the rightful permissions by HIMALAYANTRIBE.<br>
+•	Full Payment of the trip cost must be made before the trip begins. Pending Payments may eventually lead to the Cancellation of the trip.<br>
+•	The IDs shall all be verified before boarding. No boarding shall be entertained without a valid Govt. ID.<br>
+•	The Transfer of the bookings is not permitted. Only the names mentioned at the time of confirmation shall be allowed to travel.<br>
+•	No refunds shall be made towards any inclusion(s) not availed by the Client.<br>
+•	Travelers must take care of their luggage & belongings. The management shall not be responsible for any damage or any missing items along the tour.<br>
+•	The time of Departure is stated & fixed. All travelers must update their status with the Trip coordinator(s), & report at the pickup point 30 mins prior to the scheduled departure.<br>
+•	The Air Conditioning will be switched off in the hills. Also, during the trip, it shall be the Driver’s discretion to put off the AC as & when required, considering the travelers’ safety & ease of travel along uneven & dangerous routes.<br>
+•	Our time of departure is fixed must depart by the stated time & keep their status updated with the trip coordinator(s). Anyone missing the bus shall not be eligible for any refunds. We shall call you twice before the schedule departure.<br>
+•	Drinking & Smoking are strictly prohibited along the tour due to health & safety concerns. Our tours involve physically demanding activities such as trekking, camping at high altitudes and we recommend for you to be in the right shape to make most of them.<br>
+•	No act of misconduct or indiscipline shall be tolerated on the tours. We are a cordial travel community and we aspire to bring to you a hassle free and memorable experience.<br>
+•	HIMALAYANTRIBE shall not be responsible for any delays or alterations in the program or indirectly incurred expenses in cases such as Natural Hazards, accident, breakdown of machinery, weather conditions, landslides, political closure or any untoward incidents.<br>
+•	We do not provide any insurance policy to cover for the expenditure on sickness or accidents or losses incurred due to theft or other reasons.<br>
+•	Numerous factors such as weather and road conditions the physical ability of participants etc. may bring alteration in the itinerary. We reserve the right to make necessary changes in the schedule in the interest of safety, comfort and general well-being!<br>
+
+        </p>
+    </div>
+    <!-- desclaimer -->
+    <div id="d-popup" class="footer-pop-div">
+        <p id="d-content" class="popup-content">
+            <span class="capitalize">
+                disclaimer
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            HIMALAYAN TRIBE provides the www.HIMALAYAN TRIBE.CO Web site as a service to the public and Web site owners.<br><br>
+
+HIMALAYAN TRIBE is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the site. While the information contained within the site is periodically updated, no guarantee is given that the information provided in this Website is correct, complete, and up-to-date.<br><br>
+
+Although the HIMALAYAN TRIBE Website may include links providing direct access to other Internet resources, including Web sites, HIMALAYAN TRIBE is not responsible for the accuracy or content of information contained in these sites.
+<br><br>
+Links from HIMALAYAN TRIBE.CO to third-party sites do not constitute an endorsement by HIMALAYAN TRIBE of the parties or their products and services. The appearance on the Web site of advertisements and product or service information does not constitute an endorsement by HIMALAYAN TRIBE.<br>
+
+        </p>
+    </div>
+    <!-- about-us -->
+    <div id="a-popup" class="footer-pop-div">
+        <p id="a-content" class="popup-content">
+            <span class="capitalize">
+                about us
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+
+
+<!-- GO TOP -->
+    <a href="#top" class="go-top" data-go-top>
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!-- Swiper Js -->
+    <script src="{% static 'website/js/swiper-bundle.min.js' %}"></script>
+    <!-- JS -->
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <!-- JS -->
+    <script src="{% static 'website/js/script.js' %}" defer></script>
+    <script src="{% static 'website/js/slider.js' %}" defer></script>
+
+</body>
+</html>

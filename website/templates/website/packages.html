@@ -1,0 +1,357 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="{% static 'website/css/swiper-bundle.min.css' %}">
+
+
+    <!-- RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+
+    <!-- Title -->
+    <title>Himalayan Tribe</title>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'website/images/himalayanTribeLogo1.png' %}" type="image/x-icon">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="{% static 'website/css/packages.css' %}">
+
+</head>
+<body id="bodyTag">
+    <!-- Header -->
+    <header class="header">
+        <nav class="headerNav">
+            <figure class="logo">
+                <img src="{% static 'website/images/himalayanTribeLogo1.png' %}" alt="" id="logoImg">
+                <a href="tel:+917559700666" class="headerCall"><i class="ri-phone-line"></i> +91-7559700666
+                </a>
+            </figure>
+            <ul class="headerUl upperCase">
+                <li class="innerLogo">
+                    <figure class="logo">
+                        <img src="{% static 'website/images/himalayanTribeLogo1.png' %}" alt="" id="innerLogoImg">
+                    </figure>
+                    <button id="hamburgerCloseBtn">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </li>
+                <li class="headerList">
+                    <a href="{% url 'home'%}" class="navListAnchor">
+                        <i class="ri-home-2-line"></i> home
+                    </a>
+                </li>
+                <li class="headerList">
+                    <a href="#exotic-packages" class="navListAnchor">
+                        <i class="ri-ancient-gate-line"></i>
+                        Categories
+                    </a>
+                </li>
+                <li class="headerList">
+                    <a href="#query" class="navListAnchor">
+                        <i class="ri-chat-3-line"></i>
+                        contact us
+                    </a>
+                </li>
+                <li class="innerLogo">
+                    <img src="{% static 'website/images/shapes/castle1.png' %}" alt="" class="innerLogoShape">
+                </li>
+            </ul>
+            <div class="hamburger">
+                <button id="hamburgerOpenBtn">
+                    <i class="ri-menu-4-fill"></i>
+                </button>
+                <div id="popUp" ></div>
+            </div>
+        </nav>
+        <div class="headerContent">
+            <div id="popularHeaderMotto" class="headerMotto upperCase">
+                packages
+            </div>
+            <!-- <p id="popularHeaderMotto" class="headerAbout">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            </p> -->
+        </div>
+    </header>
+
+
+    <!-- Packages -->
+
+    {% for cat in categories %}
+    <section id="exotic-packages">
+
+        <!-- header -->
+        <h1 id="exotic-packagesHeader" class="sectionHeading capitalize">
+            <i class="ri-ancient-gate-line"></i>&nbsp;{{ cat.title }}
+        </h1>
+        
+        <!-- Slider -->
+        <div id="exotic-packagesSlider" class="slide-container swiper">
+            <div class="slide-content">
+                <div id="exotic-packagesSliderCardContainer" class="card-wrapper swiper-wrapper">
+                    <!-- Cards -->
+                    {% for package in packages %}
+                        {% if package.categories == cat %}
+                            <div class="card swiper-slide">
+                                <!-- div to handle the image -->
+                                <a href="">
+                                    <div class="image-content popular-image-content round-corner">
+                                        <div class="card-image popular-card-image">
+                                            <img src="{{ package.front_img.url }}" alt="" class="card-img">
+                                        </div>
+                                        <div class="glassmorp-card">
+                                            <h3 class="upperCase glassmorp-heading">{{ package.title }}
+                                            </h3>
+                                            <p class="glassmorp-plan capitalize">
+                                                <i class="ri-time-line"></i>&nbsp; {{ package.nights }} nights-{{ package.days }} days
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                </div>
+                <div class="swiper-button-next swiper-navBtn"></div>
+                <div class="swiper-button-prev swiper-navBtn"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div> 
+
+
+        <!-- button for the destination page -->
+        <a id="packagesBtn" class="moreinfo capitalize" href="#" target="_blank">view all packages</a>
+
+
+    </section>
+
+    <hr>
+    {% endfor %}
+   
+    <!-- Query Section -->
+    
+    <section id="query">
+        <h1 id="galleryHeader" class="sectionHeading capitalize">
+            <i class="ri-chat-3-line"></i>&nbsp;contact us
+        </h1>
+        <form action="{% url 'home' %}" method=POST class="query-form">
+            {% csrf_token %}
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <input type="email" name="email" id="email" placeholder="E-mail" required>
+            <input type="tel" name="telephone" id="telphone" placeholder="Phone Number" required>
+            <div class="query-form-div">
+                <span>
+                    <label for="start-date">Start-Date:</label>
+                    <input type="date" name="start-date" id="start-date" placeholder="Start-Date">
+                </span>
+                <span>
+                    <label for="end-date">End-Date:</label>
+                    <input type="date" name="end-date" id="end-date" placeholder="End-Date">
+                </span>
+                
+            </div>
+            <span class="query-form-category">
+                <label for="select-category" class="capitalize">Category&nbsp;: </label>
+                <select id="select-category" name="select-category" class="capitalize">
+                    <option hidden disabled selected value=""></option>
+                    <option value="family" class="capitalize">family</option>
+                    <option value="Exotic" class="capitalize">Exotic</option>
+                    <option value="honeymoon" class="capitalize">honeymoon</option>
+                    <option value="group" class="capitalize">group</option>
+                    <option value="mnc" class="capitalize">MNC</option>
+                    <option value="none" class="capitalize">none</option>
+                </select>
+            </span>
+            <textarea name="message" id="message" placeholder="Enter Query"></textarea>
+            <div class="query-btn-container">
+                <button class="query-btn whatsappBtn" type="submit">Whatsapp</button>
+                <button class="query-btn" type="submit" formaction="{% url 'mail' %}">Email</button>
+            </div>
+        </form>
+    </section>
+
+    <hr>
+
+
+    <!-- Footer -->
+    <footer id="contactUs">
+        <h1 class="sectionHeading capitalize">      
+           || अतिथिदेवो भव: ||
+        </h1>
+
+        <div class="footer-upper">
+            <div class="footer-contact">
+                <h2 class="contact-text">
+                    Feel free to contact and reach us !!
+                </h2>
+        
+                <ul class="contact-ul">
+                    <li class="contact-item">
+                        <ul class="handler-ul">
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-whatsapp-line"></i>
+                                </a>
+                            </li>
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                            </li>
+                            <li class="handler-list">
+                                <a href="" class="handler-anchor capitalize">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="contact-item">
+                      <i class="ri-phone-line"></i>
+                      <a href="tel:+917559700666" class="contact-link" target="_blank"> +91 7559700666</a>
+                    </li>
+        
+                    <li class="contact-item">
+                      <i class="ri-mail-line"></i>
+                      <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=himalayantribetravels@gmail.com" class="contact-link" target="_blank"> himalayantribetravels@gmail.com</a>
+                    </li>
+        
+                    <li class="contact-item">
+                    <i class="ri-map-pin-2-line"></i>
+                      <address class="upperCase"> HIMALAYAN TRIBE, WARD NO. 15, SHAMTI SOLAN HIMACHal pradesh 173212</address>
+                    </li>
+        
+                </ul>
+            </div>
+
+            <div class="footer-shape">
+
+                <img src="{% static 'website/images/shapes/feets1.png' %}" alt="" class="feetImg">
+                
+            </div>
+            
+            <div class="quick-links">
+                <h2 class="contact-text capitalize">
+                    quick links
+                </h2>
+                <ul class="quick-ul">
+                    <li id="privacy-policy" class="quick-list capitalize">
+                        privacy policy
+                    </li>
+                    <li id="cancellation-policy" class="quick-list capitalize">
+                        cancellation policy
+                    </li>
+                    <li id="terms-and-cond" class="quick-list capitalize">
+                        terms & conditions
+                    </li>
+                    <li id="disclaimer-policy" class="quick-list capitalize">
+                        disclaimer
+                    </li>
+                    <li id="about-us" class="quick-list capitalize">
+                        about us
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="footer-lower">
+            <p class="copyright">
+                &copy; 2022 <a href="">HimalayanTribe</a>.&nbsp; All rights reserved
+            </p>
+        </div>
+
+    </footer>
+<!-- PopUp Div -->
+    <!-- privacy policy popup box  -->
+    <div id="pp-popup" class="footer-pop-div">
+        
+        <p id="pp-content" class="popup-content">
+            <span class="capitalize">
+                privacy policy
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+    <!-- cancellation -->
+    <div id="cp-popup" class="footer-pop-div">
+        <p id="cp-content" class="popup-content">
+            <span class="capitalize">
+                cancellation policy
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+    <!-- terms and conditions -->
+    <div id="tc-popup" class="footer-pop-div">
+        <p id="tc-content" class="popup-content">
+            <span class="capitalize">
+                terms & conditions
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+    <!-- desclaimer -->
+    <div id="d-popup" class="footer-pop-div">
+        <p id="d-content" class="popup-content">
+            <span class="capitalize">
+                disclaimer
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+    <!-- about-us -->
+    <div id="a-popup" class="footer-pop-div">
+        <p id="a-content" class="popup-content">
+            <span class="capitalize">
+                about us
+                <button class="popup-close-btn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </span>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+
+
+    <!-- Go Top -->
+    <a href="#top" class="go-top" data-go-top>
+        <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!-- Swiper Js -->
+    <script src="{% static 'website/js/swiper-bundle.min.js' %}"></script>
+    <!-- JS -->
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <!-- JS -->
+    <script src="{% static 'website/js/script.js' %}" defer></script>
+    <script src="{% static 'website/js/slider.js' %}" defer></script>
+</body>
+</html>
