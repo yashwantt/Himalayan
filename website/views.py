@@ -44,7 +44,7 @@ Package Category : {cat}
 Query : {request.POST.get('message')}
 '''
         himalayantribe = '7559700666'
-        me = '7014334328'
+        me = '7559700666'
         return redirect(f'https://wa.me/{himalayantribe}?text={msg}')
     
     
@@ -121,7 +121,7 @@ def cabs(request):
 
 
 himalayantribe = '7559700666'
-"https://wa.me/7014334328?text=heyy"
+"https://wa.me/7559700666?text=heyy"
 
 "himalayantribetravels@gmail.com"
 
