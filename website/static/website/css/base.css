@@ -288,7 +288,7 @@ hr{
 .card-image .card-img{
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: scale-down;
   transition: var(--transition);
 }
 .card-img:hover{
@@ -297,7 +297,7 @@ hr{
 
 
 .popular-image-content{
-  height: 400px;
+  height: 300px;
   overflow: hidden;
 }
 .round-corner{
@@ -323,7 +323,7 @@ hr{
   height: 100%;
   width: 100%;
   z-index: 1;
-  object-fit: cover;
+  object-fit: scale-down;
 }
 
 .overlay{
