@@ -24,12 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+^m3y!^^=nh&+a=%@9l-di2)(idh_xj6@26%@1ny6y3rk#2s+4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*",'localhost','himalayantribe.co', 'www.himalayantribe.co', '31.187.75.109','127.0.0.1']
 
-if not DEBUG:
-    CSRF_TRUSTED_ORIGINS= ['https://himalayantribe.co/']
+CSRF_TRUSTED_ORIGINS= ['https://himalayantribe.co/']
 
 
 # Application definition
