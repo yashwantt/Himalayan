@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*",'localhost','himalayantribe.co', 'www.himalayantribe.co', '31.187.75.109','127.0.0.1']
 
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS= ['https://himalayantribe.co/']
+
 
 # Application definition
 
