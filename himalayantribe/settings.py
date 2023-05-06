@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*",'localhost','himalayantribe.co', 'www.himalayantribe.co', '31.187.75.109','127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS= ['https://himalayantribe.co/']
+CSRF_TRUSTED_ORIGINS= ['https://web-production-5fef.up.railway.app']
 
 
 # Application definition
