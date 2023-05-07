@@ -288,7 +288,7 @@ hr{
 .card-image .card-img{
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: scale-down;
   transition: var(--transition);
 }
 .card-img:hover{
@@ -297,7 +297,7 @@ hr{
 
 
 .popular-image-content{
-  height: 400px;
+  height: 300px;
   overflow: hidden;
 }
 .round-corner{
@@ -350,7 +350,7 @@ hr{
 .glassmorp-card{
   position: absolute;
   background: rgba(0, 0, 0, 0.6);
-  top: 70%;
+  top: 65%;
   height: 50%;
   width: 100%;
   transition: var(--transition);
