@@ -36,7 +36,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
 
-
 </head>
 
 
@@ -183,27 +182,22 @@
                                     <img src="{{ pack.front_img.url }}" alt="" class="card-img" loading="lazy">
                                 </div>
                                 <div class="glassmorp-card">
-                                    <h4 class="upperCase glassmorp-heading">{{ pack.title }}
-                                    </h4>
+                                    <h4 class="upperCase glassmorp-heading">{{ pack.title }}</h4>
                                     <p class="glassmorp-plan capitalize">
                                         <i class="ri-time-line"></i>&nbsp; {{ pack.days }} nights-{{ pack.nights }} days
                                     </p>
-                                    <h4 class="upperCase glassmorp-heading">EX {{ pack.starting_from }}
-                                    </h4>
+                                    <h4 class="upperCase glassmorp-heading">EX {{ pack.starting_from }}</h4>
                                 </div>
                             </div>
                         </a>
                     </div>
                     {% endfor %}
-                    
                 </div>
                 <div class="swiper-button-next swiper-navBtn"></div>
                 <div class="swiper-button-prev swiper-navBtn"></div>
                 <div class="swiper-pagination"></div>
             </div>
-        </div> 
-
-
+        </div>
         <!-- button for the destination page -->
         <!-- <a id="packagesBtn" class="moreinfo capitalize" href="" target="_blank">view all packages</a> -->
 
