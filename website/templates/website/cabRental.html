@@ -152,6 +152,7 @@
         </h1>
         <form method=POST action="{% url 'home' %}" class="query-form"  id="query-form-section">
             {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
             <input type="text" name="name" id="name" placeholder="Your Name" required>
             <input type="email" name="email" id="email" placeholder="E-mail">
             <input type="tel" name="telephone" id="telephone" placeholder="Phone Number" required>
