@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Popular_Destination, Package, Image, Pack_Desc, Cab, Inclusions
-# Create your views here.
+from django.views.decorators.csrf import csrf_protect
 
+# Create your views here.
+@csrf_protect
 def mail(request):
     subject = "Regarding Tour Booking"
     cat = {request.POST.get('select-category')}
@@ -22,7 +24,7 @@ Query : {request.POST.get('message')}
     return redirect(f"https://mail.google.com/mail/?view=cm&fs=1&to=himalayantribetravels@gmail.com&su={subject}&body={msg}")
     
 
-
+@csrf_protect
 def home(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -55,7 +57,7 @@ Query : {request.POST.get('message')}
         'images':Image.objects.filter(to_be_shown = True)[:10],
         'cabs':Cab.objects.filter(popular = True)
     }
-    return render(request,'website/index.html', context = context)
+    return render(request, 'website/index.html', context)
 
 
 
