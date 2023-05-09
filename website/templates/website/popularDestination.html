@@ -151,11 +151,12 @@
         <h1 id="galleryHeader" class="sectionHeading capitalize">
             <i class="ri-chat-3-line"></i>&nbsp;contact us
         </h1>
-        <form action="{% url 'home' %}" method=POST class="query-form">
+        <form method= POST class="query-form">
             {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken" value="pHK2CZzBB323BM2Nq7DE2sxnQoBG1jPl" disabled="">
             <input type="text" name="name" id="name" placeholder="Your Name" required>
             <input type="email" name="email" id="email" placeholder="E-mail" required>
-            <input type="tel" name="telphone" id="telphone" placeholder="Phone Number" required>
+            <input type="tel" name="telephone" id="telephone" placeholder="Phone Number" required>
             <div class="query-form-div">
                 <span>
                     <label for="start-date">Start-Date:</label>
@@ -181,8 +182,9 @@
             </span>
             <textarea name="message" id="message" placeholder="Enter Query"></textarea>
             <div class="query-btn-container">
+                {% csrf_token %}
                 <button class="query-btn whatsappBtn" type="submit">Whatsapp</button>
-                <button class="query-btn" type="submit">Email</button>
+                <button class="query-btn" formaction="{% url 'mail' %}" target = "_blank">Email</button>
             </div>
         </form>
     </section>

@@ -154,7 +154,7 @@
             {% csrf_token %}
             <input type="text" name="name" id="name" placeholder="Your Name" required>
             <input type="email" name="email" id="email" placeholder="E-mail">
-            <input type="te" name="telephone" id="telephone" placeholder="Phone Number" required>
+            <input type="tel" name="telephone" id="telephone" placeholder="Phone Number" required>
 
             <div class="query-form-div">
                 <span>
@@ -226,6 +226,7 @@
             </div>
             
             <div class="query-btn-container">
+                {% csrf_token %}
                 <button class="query-btn whatsappBtn"  id="whatsapp-btn" type="button">Whatsapp</button>
                 <button class="query-btn" id="email-btn">Email</button>
             </div>
