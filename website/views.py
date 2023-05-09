@@ -12,7 +12,7 @@ def mail(request):
     msg = f'''Greetings!
 I want to know more about the packages that you are offering.
 Name : {request.POST.get('name')}
-Mobile : {request.POST.get('telphone')}
+Mobile : {request.POST.get('telephone')}
 Email : {request.POST.get('email')}
 Start Date : {request.POST.get('start-date')}
 End Date : {request.POST.get('end-date')}
@@ -27,7 +27,7 @@ def home(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
-        mobile = request.POST.get('telphone')
+        mobile = request.POST.get('telephone')
         # cust = Customer(name = name, mobile = mobile, email = email)
         # cust.save()
         cat = {request.POST.get('select-category')}
