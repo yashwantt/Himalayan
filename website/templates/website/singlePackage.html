@@ -285,7 +285,6 @@
             </span>
             <textarea name="message" id="message" placeholder="Enter Query"></textarea>
             <div class="query-btn-container">
-                {% csrf_token %}
                 <button class="query-btn whatsappBtn" type="submit">Whatsapp</button>
                 <button class="query-btn" formaction="{% url 'mail' %}" target = "_blank">Email</button>
             </div>
